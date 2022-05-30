@@ -1,0 +1,81 @@
+<!-- <app-navbar-admin></app-navbar-admin> -->
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Products</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="user-dashboard page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+                    <div class="form-group">
+                        <select class="form-control" #category (change)="getSubcategories(category.value)" ngModel name="category">
+							<option value="">Select Category</option>
+                            <option *ngFor="let category of categoriesList" value="{{category.id}}">{{category.id}}</option>
+                        </select>
+						</div>
+						<div class="form-group">
+						<select class="form-control" ngModel name="subcategory">
+							<option value="">Select Subcategory</option>
+                            <option *ngFor="let subcategory of subcategoriesList" value="{{subcategory.id}}" >{{subcategory.id}}</option>
+                        </select>
+                      </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Product Name" ngModel name="name">
+                    </div>
+					<div class="form-group">
+						<input type="number" class="form-control" placeholder="Product Price" ngModel name="price">
+					  </div>
+					  <div class="form-group">
+						<input type="text" class="form-control" placeholder="Product Number" ngModel name="id">
+					  </div>
+					  <div class="form-group">
+						<textarea class="form-control" rows="5" placeholder="Product Description" ngModel name="description"></textarea>
+					  </div>
+					  <div class="form-group" >
+						<input type="file" class="form-control" (change)="upload($event)"  ngModel name="img">
+						<!-- <input *ngIf="edit" type="text" class="form-control" ngModel name="img"> -->
+					  </div>
+					  <!-- <div class="form-group" >
+						<input type="text" class="form-control" ngModel name="img">
+					  </div> -->
+                    <button type="submit" class="btn btn-main" >Add</button>
+                  </form>
+				<div class="dashboard-wrapper user-dashboard">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Name</th>
+									<th>Price</th>
+									<th>Category</th>
+									<th>Subcategory</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let product of productList; let i= index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{product.name}}</td>
+									<td>{{product.price}}</td>
+									<td>{{product.category}}</td>
+									<td>{{product.subcategory}}</td>
+									<td><span class="label label-danger btn" (click)="deleteProduct(product.id)">Delete</span></td>
+									<!-- <td><button (click)="editProduct(product.id,productForm)">Edit</button></td> -->
+                                  </tr> 	
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

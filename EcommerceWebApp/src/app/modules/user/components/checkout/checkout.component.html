@@ -1,0 +1,143 @@
+<!-- <app-navbar-user></app-navbar-user> -->
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Cart</h1>
+					<ol class="breadcrumb">
+						<li><a routerLink="/user/home">Home</a></li>
+						<li class="active" routerLink="/user/cart">Cart</li>
+                        <li class="active">Checkout</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="page-wrapper">
+    <div class="checkout shopping">
+       <div class="container">
+          <div class="row">
+             <div class="col-md-8">
+                <div class="block billing-details">
+                   <h4 class="widget-title">Billing Details</h4>
+                   <form class="checkout-form" #addressForm="ngForm" (ngSubmit)="addAddress(addressForm)">
+                      <div class="form-group" >
+                         <label for="full_name">Full Name</label>
+                         <input type="text" class="form-control" id="full_name" placeholder="" ngModel name="firstname" required #firstname="ngModel" [pattern]="'^[a-zA-Z ]*$'">
+                         <div *ngIf="firstname.invalid && firstname.touched">
+                           <small class="text-danger" *ngIf="firstname.errors?.['required']">Name is required</small>
+                           <small class="text-danger" *ngIf="firstname.errors?.['pattern']">Name is invalid</small>
+                         </div>
+                      </div>
+                      <div class="form-group">
+                         <label for="user_address">Address</label>
+                         <input type="text" class="form-control" id="user_address" placeholder="" ngModel name="address" required #address="ngModel">
+                           <small class="text-danger" *ngIf="address.invalid && address.touched">Address is required</small>
+                          </div>
+                          <!-- <div class="form-group">
+                           <label for="user_country">Country</label>
+                           <input type="text" class="form-control" id="user_country" placeholder="" ngModel name="country" required #country="ngModel">
+                           <small class="text-danger" *ngIf="country.invalid && country.touched">Country is required</small>
+                          </div> -->
+                          <div class="form-group">
+                           <label for="user_country">Country</label>
+                              <select (change)="changeCountry($event.target)" class="form-control" id="user_country" placeholder="" ngModel name="country" required #country="ngModel">
+                                 <option value="" disabled></option>
+                                 <option *ngFor ="let count of countryList" >{{count.name}} </option>
+                             </select>
+                          </div>
+                          <div class="form-group" >
+                           <label for="user_country">City</label>
+                           <select class="form-control" id="user_city" name="city" value="" ngModel required #city="ngModel">
+                              <option value="" disabled></option>
+                              <option *ngFor ="let city of cities">{{city}} </option>
+                        </select>
+                        </div>
+                        <!-- <div class="form-group">
+                           <label for="user_post_code">Zip Code</label>
+                           <input type="text" class="form-control" id="user_post_code" name="zipcode" value="" ngModel required #zipcode="ngModel" [pattern]="'^[0-9 ]*$'">
+                           <div  *ngIf="zipcode.invalid && zipcode.touched">
+                           <small class="text-danger" *ngIf="zipcode.errors?.['required']">Zipcode is required</small>
+                           <small class="text-danger" *ngIf="zipcode.errors?.['pattern']">Zipcode is invalid</small>
+                           </div>
+                          </div> -->
+                      <!-- <div class="checkout-country-code clearfix">
+                         <div class="form-group">
+                            <label for="user_post_code">Zip Code</label>
+                            <input type="text" class="form-control" id="user_post_code" name="zipcode" value="" ngModel required #zipcode="ngModel" [pattern]="'^[0-9 ]*$'">
+                            <div  *ngIf="zipcode.invalid && zipcode.touched">
+                            <small class="text-danger" *ngIf="zipcode.errors?.['required']">Zipcode is required</small>
+                            <small class="text-danger" *ngIf="zipcode.errors?.['pattern']">Zipcode is invalid</small>
+                            </div>
+                           </div>
+                         <div class="form-group" >
+                            <label for="user_city">City</label>
+                            <input type="text" class="form-control" id="user_city" name="city" value="" ngModel required #city="ngModel">
+                            <small class="text-danger" *ngIf="city.invalid && city.touched">City is required</small>
+                         </div>
+                      </div> -->
+                      <!-- <div class="checkout-country-code clearfix">
+                        <div class="form-group" >
+                           <select class="form-control" id="user_city" name="city" value="" ngModel required #city="ngModel">
+                              <option value="" disabled selected>City</option>
+                              <option *ngFor ="let city of cities">{{city}} </option>
+                        </select>
+                        </div>
+                        <div class="form-group" >
+                           <select class="form-control" id="user_city" name="city" value="" ngModel required #city="ngModel">
+                              <option value="" disabled selected>City</option>
+                              <option *ngFor ="let city of cities">{{city}} </option>
+                        </select>
+                        </div>
+                     </div> -->
+                      <button type="submit" [disabled]="addressForm.invalid" class="btn btn-main mt-20">Place Order</button >
+                   </form>
+                </div>
+             </div>
+             <div class="col-md-4">
+                <div class="product-checkout-details">
+                   <div class="block">
+                      <h4 class="widget-title">Order Summary</h4>
+                      <div class="media product-card" *ngFor="let product of cartProductList">
+                         <a class="pull-left" [routerLink]="['/user/products',product.id]">
+                            <img class="media-object" src="{{product.img}}" alt="Image" />
+                         </a>
+                         <div class="media-body">
+                            <h4 class="media-heading"><a [routerLink]="['/user/products',product.id]">{{product.name}}</a></h4>
+                            <p class="price">{{product.qty}}x ${{product.price}}</p>
+                            <span class="remove" (click)="removeProductFromCart(product.id)">Remove</span>
+                         </div>
+                      </div>
+                      <ul class="summary-prices">
+                         <li>
+                            <span>Subtotal:</span>
+                            <span class="price">${{totalPrice}}</span>
+                         </li>
+                         <li>
+                            <span>Shipping:</span>
+                            <span>Free</span>
+                         </li>
+                      </ul>
+                      <div class="summary-total">
+                         <span>Total</span>
+                         <span>${{totalPrice}}</span>
+                      </div>
+                      <div class="verified-icon">
+                         <img src="./assets/images/shop/verified.png">
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <!-- <div class="container">
+   <input ngx-google-places-autocomplete (onAddressChange)="handleAddressChange($event)" />
+ 
+   <p>Address: {{ userAddress }}</p>
+   <p>Latitude: {{ userLatitude }}</p>
+   <p>Longitude: {{ userLongitude }}</p>
+ </div> -->

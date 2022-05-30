@@ -1,0 +1,75 @@
+<section class="signin-page account">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="block text-center">
+            <a class="logo">
+              <img src="./assets/images/logo.png" alt="">
+            </a>
+            <h2 class="text-center">Create Your Account</h2>
+            <form class="text-left clearfix" action="index.html" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <input [class.is-invalid]="signupForm.get('firstname')!.invalid && signupForm.get('firstname')!.touched" type="text" class="form-control"  placeholder="First Name" formControlName="firstname">
+                <div *ngIf="signupForm.get('firstname')!.invalid && signupForm.get('firstname')!.touched">
+                <small *ngIf="signupForm.get('firstname')?.errors?.['required']" class="text-danger">First Name is required</small>
+                <small *ngIf="signupForm.get('firstname')?.errors?.['pattern']" class="text-danger">Invalid First Name</small>
+              </div>
+              </div>
+              <div class="form-group">
+                <input [class.is-invalid]="signupForm.get('lastname')!.invalid && signupForm.get('lastname')!.touched" type="text" class="form-control"  placeholder="Last Name" formControlName="lastname">
+                <div *ngIf="signupForm.get('lastname')!.invalid && signupForm.get('lastname')!.touched">
+                  <small *ngIf="signupForm.get('lastname')?.errors?.['required']" class="text-danger">Last Name is required</small>
+                  <small *ngIf="signupForm.get('lastname')?.errors?.['pattern']" class="text-danger">Invalid First Name</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" [class.is-invalid]="signupForm.get('username')!.invalid && signupForm.get('username')!.touched" class="form-control"  placeholder="Username" formControlName="username">
+                <div *ngIf="signupForm.get('username')!.invalid && signupForm.get('username')!.touched">
+                  <small *ngIf="signupForm.get('username')?.errors?.['required']" class="text-danger">User Name is required</small>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="email" [class.is-invalid]="signupForm.get('email')!.invalid && signupForm.get('email')!.touched" class="form-control"  placeholder="Email" formControlName="email">
+                <div *ngIf="signupForm.get('email')!.invalid && signupForm.get('email')!.touched">
+              <small
+                *ngIf="signupForm.get('email')?.errors?.['required']"
+                class="text-danger"
+                >Email is required</small
+              >
+              <small
+                *ngIf="signupForm.get('email')?.errors?.['email']"
+                class="text-danger"
+                >Invalid Email</small
+              >
+            </div>
+              </div>
+              <div class="form-group">
+                <input type="password" [class.is-invalid]="signupForm.get('password')!.invalid && signupForm.get('password')!.touched" class="form-control"  placeholder="Password" formControlName="password">
+                <div
+                *ngIf="
+                signupForm.get('password')!.invalid &&
+                signupForm.get('password')!.touched
+                "
+              >
+                <small
+                  *ngIf="signupForm.get('password')?.errors?.['required']"
+                  class="text-danger"
+                  >Password is required</small
+                >
+                <small
+                  *ngIf="signupForm.get('password')?.errors?.['minlength']"
+                  class="text-danger"
+                  >Password must be 5 characters</small
+                >
+              </div>
+              </div>
+              <div class="text-center">
+                <button type="submit" [disabled]="signupForm.invalid" class="btn btn-main text-center">Sign In</button>
+              </div>
+            </form>
+            <p class="mt-20">Already have an account ?<a routerLink="/login"> Login</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

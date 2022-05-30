@@ -1,0 +1,103 @@
+<!-- <app-navbar-user></app-navbar-user> -->
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Shop</h1>
+					<ol class="breadcrumb">
+						<li><a routerLink="/user/home">Home</a></li>
+						<li class="active" *ngIf="category">{{category}}</li>
+                        <li class="active" *ngIf="subcategory">{{subcategory}}</li>
+						<li class="active" *ngIf="subcategory==''">Search</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section *ngIf="products.length==0" class="empty-cart page-wrapper">
+	<div class="container">
+	  <div class="row">
+		<div class="col-md-6 col-md-offset-3">
+		  <div class="block text-center">
+			  <i class="tf-ion-ios-cart-outline"></i>
+				<h2 class="text-center">No Items In This Category.</h2>
+		</div>
+	  </div>
+	</div>
+  </div>
+  </section>
+<section class="products section" *ngIf="products.length>0">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="widget">
+					<h4 class="widget-title">Sort By</h4>
+					<form method="post" action="#">
+                        <select class="form-control"(change)="sortProductsBy(sortBy.value)" #sortBy placeholder="">
+							<!-- <option>Newest </option> -->
+							<option value="" disabled selected>Select your option</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to low</option>
+                        </select>
+                    </form>
+	            </div>
+				<div class="widget product-category">
+					<h4 class="widget-title">Search</h4>
+					<div class="panel-group commonAccordion" id="accordion" role="tablist" aria-multiselectable="true">
+						<form action="" class="form-inline" (ngSubmit)="searchItems(search.value)">
+							<input type="search" class="form-control" placeholder="Search..." #search>
+							<button class="btn btn-dark" type="submit"><i class="tf-ion-ios-search-strong text-center"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div class="row">					
+			<div class="col-md-4" *ngFor="let product of products" >
+				<div class="product-item">
+					<div class="product-thumb" >
+						<!-- <span class="bage">Sale</span> -->
+						<img class="img-responsive" src="{{product.img}}" alt="product-img" [routerLink]="['/user/products',category,subcategory,product.id]"/>
+						<div class="preview-meta">
+							<ul>
+								
+								<li>
+			                        <a [routerLink]="['/user/products',category,subcategory,product.id]"><i class="tf-ion-ios-search-strong"></i></a>
+								</li>
+								<li>
+			                        <a><i class="tf-ion-ios-heart" (click)="addToWishlist(product.id)"></i></a>
+								</li>
+								<li>
+									<a><i class="tf-ion-android-cart" (click)="addToCart(product.id)"></i></a>
+								</li>
+							</ul>
+                      	</div>
+						  <!-- <div class="preview-meta" >
+							<ul>
+								
+								<li>
+			                        <a><i class="tf-ion-ios-plus"></i></a>
+								</li>
+								<li>
+			                        <a><i class="tf-ion-ios-heart" ></i></a>
+								</li>
+								<li>
+									<a><i class="tf-ion-ios-minus"></i></a>
+								</li>
+							</ul>
+                      	</div> -->
+					</div>
+					<div class="product-content">
+						<h4><a [routerLink]="['/user/products',category,subcategory,product.id]">{{product.name}}</a></h4>
+						<p class="price">${{product.price}}</p>
+					</div>
+				</div>
+			</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ecommerce-a92b0": {
+      "hosting": {
+        "EcommerceWebApp": [
+          "ecommerce-a92b0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ecommerce-a92b0"
+  }
+}

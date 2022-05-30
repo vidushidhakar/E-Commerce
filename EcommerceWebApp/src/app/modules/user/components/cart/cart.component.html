@@ -1,0 +1,85 @@
+<!-- <app-navbar-user></app-navbar-user> -->
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Cart</h1>
+					<ol class="breadcrumb">
+						<li><a routerLink="/user/home">Home</a></li>
+						<li class="active">cart</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section *ngIf="cartProductList.length==0" class="empty-cart page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="block text-center">
+        	<i class="tf-ion-ios-cart-outline"></i>
+          	<h2 class="text-center">Your cart is currently empty.</h2>
+          	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, sed.</p>
+          	<a routerLink="/user/home" class="btn btn-main mt-20">Return to shop</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="page-wrapper" *ngIf="cartProductList.length>0">
+  <div class="cart shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="block">
+            <div class="product-list">
+              <form method="post">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="">Item Name</th>
+                      <th class="">Item Price</th>
+                      <th class="">Qty</th>
+                      <th class="">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="" *ngFor="let product of cartProductList" >
+                      <td class=>
+                        <div class="product-info">
+                          <img width="80" src="{{product.img}}" alt="" />
+                          <a [routerLink]="['/user/products',product.id]">{{product.name}}</a>
+                        </div>
+                      </td>
+                      <td class="">${{product.price*product.qty}}</td>
+                      <td>
+                      <!-- {{product.qty}} -->
+						<!-- <div class="product-quantity-slider">
+							<input id="product-quantity" type="number" value="{{product.qty}}" name="product-quantity" #quantity min=1 (change)="changeQantity(product.id,quantity.value)">
+					</div>  -->
+          <div class="input-group">
+						<input type="button" value="-" class="button-minus" data-field="quantity" (click)="decrementQuantity(product.id,quantity)">
+						<input type="number" step="1" max="" value="{{product.qty}}" name="quantity" class="quantity-field" #quantity>
+						<input type="button" value="+" class="button-plus" data-field="quantity" (click)="incrementQuantity(product.id,quantity)">
+					  </div>
+                      </td>
+                      <td class="">
+                        <a class="product-remove btn mt-20" (click)="removeProductFromCart(product.id)">Remove</a>
+                      </td>
+                    </tr>
+                   
+                  </tbody>
+                </table>
+                <a routerLink="/user/checkout" class="btn btn-main pull-right">Checkout</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<!-- <app-navbar-user></app-navbar-user> -->
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Wishlist</h1>
+					<ol class="breadcrumb">
+						<li><a routerLink="/user/home">Home</a></li>
+						<li class="active">Wishlist</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section *ngIf="wishlistProducts.length==0" class="empty-cart page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="block text-center">
+        	<i class="tf-ion-ios-cart-outline"></i>
+          	<h2 class="text-center">Your Wishlist is currently empty.</h2>
+          	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, sed.</p>
+          	<a routerLink="/user/home" class="btn btn-main mt-20">Return to shop</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<div class="page-wrapper" *ngIf="wishlistProducts.length>0">
+  <div class="cart shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="block">
+            <div class="product-list">
+              <form method="post">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="">Item Name</th>
+                      <th class="">Item Price</th>
+                      <th class="text-center">Actions</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="" *ngFor="let product of wishlistProducts" >
+                      <td >
+                        <div class="product-info">
+                          <img width="80" src="{{product.img}}" alt="" [routerLink]="['/user/products',product.id]"/>
+                          <a [routerLink]="['/user/products',product.id]">{{product.name}}</a>
+                        </div>
+                      </td>
+                      <td class="">${{product.price}}</td>
+                      <td class="">
+                        <a class="product-remove btn mt-20" (click)="removeProductFromWishlist(product.id)">Remove</a>
+                      </td>
+                      <td>
+                        <a class="btn btn-main mt-20" (click)="addToCart(product.id)">Add To Cart</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<section class="menu">
+	<nav class="navbar navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<h2 class="menu-title">Main Menu</h2>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+					aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+			</div><!-- / .navbar-header -->
+
+			<!-- Navbar Links -->
+			<div id="navbar" class="navbar-collapse collapse text-center">
+				<ul class="nav navbar-nav">
+
+					<!-- Home -->
+					<li class="dropdown " *ngIf="role=='user'">
+						<a routerLink="/user/home">Home</a>
+					</li><!-- / Home -->
+
+
+					<!-- Pages -->
+					<li class="dropdown full-width dropdown-slide" *ngIf="role=='user'">
+						<a href="#!" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="350"
+							role="button" aria-haspopup="true" aria-expanded="false">Categories <span
+								class="tf-ion-ios-arrow-down"></span></a>
+						<div class="dropdown-menu">
+							<div class="row">
+
+								<!-- Introduction -->
+								<div class="col-sm-3 col-xs-12"  *ngFor="let category of categoriesList">
+									<ul>
+										<li class="dropdown-header">{{category.id}}</li>
+										<li role="separator" class="divider" ></li>
+										<li *ngFor="let subcategory of subcategoriesList">
+											<a *ngIf="subcategory.id==category.id" [routerLink]="['/user/products',subcategory.id,subcategory.name]">{{subcategory.name}}</a>
+										</li>
+									</ul>
+								</div>
+
+					
+								
+
+								<!-- Mega Menu -->
+								<div class="col-sm-3 col-xs-12">
+									<a href="/user/home">
+										<img class="img-responsive" src="./assets/images/shop/header-img.jpg" alt="menu image" />
+									</a>
+								</div>
+							</div><!-- / .row -->
+						</div><!-- / .dropdown-menu -->
+					</li><!-- / Pages -->
+
+
+
+					<li class="dropdown " *ngIf="role=='user'">
+						<a routerLink="/user/wishlist">Wishlist</a>
+					</li>
+
+					<li class="dropdown " *ngIf="role=='user'">
+						<a routerLink="/user/cart">Cart</a>
+					</li>
+					<li class="dropdown " *ngIf="role=='user'">
+						<a routerLink="/user/myaccount">My Account</a>
+					</li>
+
+					<!-- Shop -->
+                    <li class="dropdown " *ngIf="role=='admin'">
+                        <a routerLink="/admin/users">Users</a>
+                    </li>
+                    <li class="dropdown " *ngIf="role=='admin'">
+                            <a routerLink="/admin/categories">Catergories</a>
+                    </li>
+                    <li class="dropdown " *ngIf="role=='admin'">
+                        <a routerLink="/admin/subcatergories">Subcategories</a>
+                    </li>
+                    <li class="dropdown " *ngIf="role=='admin'">
+                        <a routerLink="/admin/products">Products</a>
+                    </li>
+                    <li class="dropdown " *ngIf="role=='admin'">
+                        <a routerLink="/admin/orders">Orders</a>
+                    </li>
+					
+				</ul><!-- / .nav .navbar-nav -->
+
+			</div>
+			<!--/.navbar-collapse -->
+		</div><!-- / .container -->
+	</nav>
+</section>

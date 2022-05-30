@@ -1,0 +1,8 @@
+select{
+    border-radius: 0;
+    display: block;
+    padding: 6px 10px 5px 100px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 50px;
+}

@@ -1,0 +1,95 @@
+<!-- <app-navbar-user></app-navbar-user> -->
+<section class="single-product">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<ol class="breadcrumb">
+					<li><a routerLink="/user/home">Home</a></li>
+					<li class="active">
+						{{product.category}}
+					</li>
+                    <li class="active">{{product.subcategory}}</li>
+					<li class="active">{{product.name}}</li>
+				</ol>
+			</div>
+		</div> 
+		<div class="row mt-20">
+			<div class="col-md-5">
+				<div class="single-product-slider">
+					<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+						<div class='carousel-outer'>
+							<!-- me art lab slider -->
+							<div class='carousel-inner '>
+								<div class='item active'>
+									<img src={{product.img}} alt='' data-zoom-image="product.img" />
+								</div>
+								<div class='item'>
+									<img src={{product.img}} alt='' data-zoom-image="product.img" />
+								</div>
+							</div>
+							
+							<!-- sag sol -->
+							<a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+								<i class="tf-ion-ios-arrow-left"></i>
+							</a>
+							<a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+								<i class="tf-ion-ios-arrow-right"></i>
+							</a>
+						</div>
+							
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="single-product-details">
+					<h2>{{product.name}}</h2>
+					<p class="product-price">${{product.price}}</p>
+					
+					<p class="product-description mt-20">
+                        {{product.description}}
+					</p>
+					<div class="product-category">
+						<span>Categories:</span>
+						<ul>
+							<li>{{category}}</li>
+							<li>{{subcategory}}</li>
+						</ul>
+					</div>
+					<div class="input-group" *ngIf="inCart.qty">
+						<input type="button" value="-" class="button-minus" data-field="quantity" (click)="decrementQuantity()">
+						<input type="number" step="1" max="" value="{{inCart.qty}}" name="quantity" class="quantity-field">
+						<input type="button" value="+" class="button-plus" data-field="quantity" (click)="incrementQuantity()">
+					  </div>
+					  <div *ngIf="!inCart.qty">
+					<div class="product-quantity" >
+						<span>Quantity:</span>
+						<div class="product-quantity-slider">
+							<div class="row">
+							<input class="col-md-5" id="product-quantity" type=number value=1  name="product-quantity" #quantity min=1 (change)="changeQantity(quantity)">
+							</div>
+						</div>
+					</div>
+					<a class="btn btn-main mt-20" (click)="addToCart(product.id,quantity.value)">
+						Add To Cart
+					</a>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="tabCommon mt-20">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab"  aria-expanded="true">Details</a></li>
+					</ul>
+					<div class="tab-content patternbg">
+						<div id="details" class="tab-pane fade active in">
+							<h4>Product Description</h4>
+							<p>{{product.description}}</p>						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

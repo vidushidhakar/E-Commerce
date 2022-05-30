@@ -1,0 +1,35 @@
+<section class="signin-page account">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="block text-center">
+            <a class="logo">
+              <img src="./assets/images/logo.png" alt="">
+            </a>
+            <h2 class="text-center">Admin</h2>
+            <form class="text-left clearfix" action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <input type="email" [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="form-control"  placeholder="Email" formControlName="email">
+                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                  <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</small>
+                  <small class="text-danger" *ngIf="loginForm.get('email')?.errors?.['email']">Not a valid email</small>
+              </div>
+              </div>
+              <div class="form-group">
+                <input type="password" [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="form-control" placeholder="Password" formControlName="password">
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                  <small class="text-danger" *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
+                  <small class="text-danger" *ngIf="loginForm.get('password')?.errors?.['minlength']">Not a valid Password</small>
+              </div>
+              </div>
+              <div class="text-center">
+                <button type="submit" [disabled]="loginForm.invalid" class="btn btn-main text-center" >Login</button>
+              </div>
+            </form>
+            <p class="mt-20">User?<a routerLink="/login"> Login as User</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

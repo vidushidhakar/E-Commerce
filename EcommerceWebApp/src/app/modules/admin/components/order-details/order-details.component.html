@@ -1,0 +1,81 @@
+<!-- <app-navbar-admin></app-navbar-admin> -->
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Orders</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="user-dashboard page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="dashboard-wrapper user-dashboard">
+					<div class="table-responsive">
+						<div class="total-order mt-20">
+                            <h4>Total Orders</h4>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>User</th>
+                                            <th>Address</th>
+                                            <th>Items</th>
+                                            <th>Total Price</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let order of orderList">
+                                            <td><a >{{order.id}}</a></td>
+                                            <td><a >{{order.user}}</a></td>
+
+                                            <td>
+                                                <tr *ngFor="let a of order.address">
+                                                    <table>
+                                                        <tr>{{a.firstname}}</tr>
+                                                        <tr>{{a.address}}</tr>
+                                                        <tr>{{a.city}}</tr>
+                                                        <tr>{{a.country}}</tr>
+                                                        <tr>{{a.zipcode}}</tr>
+                                                    </table>
+                                                </tr>
+                                            </td>
+                                            <td> 
+                                                <div class="col-md-4">
+                                                <div class="product-checkout-details">
+                                                   <div class="block"  *ngFor="let productdetails of order.products">
+                                                      <h4 class="widget-title">Order Summary</h4>
+                                                      <div class="media product-card" *ngFor="let product of productdetails">
+                                                          
+                                                         <a class="pull-left">
+                                                            <img class="media-object" src="{{product.img}}" alt="Image" />
+                                                         </a>
+                                                         <div class="media-body">
+                                                            <h4 class="media-heading">{{product.name}}</h4>
+                                                            <p class="price">{{product.qty}}x ${{product.price}}</p>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                            </td>
+                                            <td>
+                                                ${{order.total}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
